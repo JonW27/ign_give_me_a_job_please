@@ -1,6 +1,18 @@
 # ign_q4_app
 
-A new Flutter project.
+An IGN client reader
+
+## Stuff I wish I had the time and money for
+* Pay for FF Din and Ars-Maquette
+* Move scroll notification into Expanded
+
+## Running
+
+Flutter run should run it.
+
+## Oh noes. Your language is wrong! Dart isn't part of ...
+
+I emailed and I was told Flutter would be ok for the app (in case not the same person).
 
 ## Getting Started
 
