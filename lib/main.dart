@@ -198,7 +198,7 @@ void initState() {
                         Column(crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              entry.metadata.howLongAgo + " ago",
+                              entry.metadata.howLongAgo + " AGO",
                               style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                               ),

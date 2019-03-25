@@ -27,13 +27,13 @@ class MetaData{
     final Duration dur = DateTime.now().difference(DateTime.parse(json["publishDate"]));
     String howLongAgo;
     if(dur.inSeconds < 60){
-      howLongAgo = dur.inSeconds.toString() + " seconds";
+      howLongAgo = dur.inSeconds.toString() + " SECONDS";
     } else if(dur.inMinutes < 60){
-      howLongAgo = dur.inMinutes.toString() + " minutes";
+      howLongAgo = dur.inMinutes.toString() + " MINUTES";
     } else if(dur.inHours < 24){
-      howLongAgo = dur.inHours.toString() + " hours";
+      howLongAgo = dur.inHours.toString() + " HOURS";
     } else{
-      howLongAgo = dur.inDays.toString() + " days";
+      howLongAgo = dur.inDays.toString() + " DAYS";
     }
 
     return MetaData(
