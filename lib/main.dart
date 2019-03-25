@@ -178,7 +178,7 @@ void initState() {
   }
 
   Widget _itemBuilder(context, Post entry, _){
-    if(entry.contentType == "article"){
+    if(entry.contentType == "article" && entry.metadata.description != null){
           return Padding(
             padding :EdgeInsets.symmetric(
               horizontal: 10.0
