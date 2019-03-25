@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
 
-import 'util.dart';
 import 'model/post_model.dart';
 import 'services/post_service.dart';
 import 'services/comment_service.dart';
@@ -61,6 +60,24 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int index = 0;
   static const int PAGE_SIZE = 10;
+  final _pageLoadController = PagewiseLoadController(
+    pageSize: 10,
+    pageFuture: (pageIndex) => fetchPosts(pageIndex * PAGE_SIZE)
+  );
+
+@override
+void initState() {
+  super.initState();
+  this._pageLoadController.addListener(() {
+    if (!this._pageLoadController.hasMoreItems) {
+      Scaffold.of(context).showSnackBar(
+        SnackBar(
+          content: Text('No More Items!')
+        )
+      );
+    }
+  });
+}
 
   @override
   Widget build(BuildContext context) {
@@ -121,6 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             child : PagewiseListView(
                               pageSize: PAGE_SIZE,
                               itemBuilder: this._itemBuilder,
+                              noItemsFoundBuilder: this._noItemsFoundBuilder,
                               pageFuture : (pageIndex) => fetchPosts(pageIndex * PAGE_SIZE)
                             )
                           )
@@ -139,9 +157,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           Divider(),
                           Expanded(
                             child : PagewiseListView(
-                              pageSize: PAGE_SIZE,
                               itemBuilder: this._videoItemBuilder,
-                              pageFuture: (pageIndex) => fetchPosts(pageIndex * PAGE_SIZE),
+                              noItemsFoundBuilder: this._noItemsFoundBuilder,
+                              pageLoadController: _pageLoadController,
                             )
                           )
                         ]
@@ -153,6 +171,10 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ),
       );
+  }
+
+  Widget _noItemsFoundBuilder(context){
+    return Text("Looks like the end. ¯\_(ツ)_/");
   }
 
   Widget _itemBuilder(context, Post entry, _){
@@ -273,7 +295,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _videoItemBuilder(context, Post entry, _){
-    if(entry.contentType == "video"){
+    if(entry.contentType == "video" && entry.metadata.description != null){
           return Column(
             children: <Widget>[
               GestureDetector(
