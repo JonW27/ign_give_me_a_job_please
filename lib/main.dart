@@ -85,6 +85,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   indicatorColor: Color.fromRGBO(191, 19, 19, 1),
                   labelColor: Color.fromRGBO(191, 19, 19, 1),
                   unselectedLabelColor: Color.fromRGBO(185, 194, 205, 1),
+                  indicatorSize: TabBarIndicatorSize.label,
+                  indicatorWeight: 4,
                   tabs : [
                     Text(
                       "ARTICLES",
