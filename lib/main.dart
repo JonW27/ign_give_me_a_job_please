@@ -74,65 +74,80 @@ class _MyHomePageState extends State<MyHomePage> {
         length : 2,
         child : Scaffold(
           appBar: AppBar(
-            bottom : ColoredTabBar(
-              Colors.white,
-              TabBar(
-                tabs : [
-                  Text(
-                    "ARTICLES",
-                    style : Theme.of(context).textTheme.title
-                  ),
-                  Text(
-                    "VIDEOS",
-                    style : Theme.of(context).textTheme.title
-                  )
-                ]
-              ),
-            )
           ),
-          body : TabBarView(
-            children : [
-              Column(
-                children : [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children : [
-                      Icon(Icons.arrow_left),
-                      Text("Swipe Between Sections"),
-                      Icon(Icons.arrow_right)
-                    ]
-                  ),
-                  Divider(),
-                  Expanded(
-                    child : PagewiseListView(
-                      pageSize: PAGE_SIZE,
-                      itemBuilder: this._itemBuilder,
-                      pageFuture : (pageIndex) => fetchPosts(pageIndex * PAGE_SIZE)
-                    )
-                  )
-                ]
+          body : Column(
+            children: <Widget>[
+              SizedBox(
+                height: 20,
               ),
-              Column(
-                children : [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children : [
-                      Icon(Icons.arrow_left),
-                      Text("Swipe Between Sections"),
-                      Icon(Icons.arrow_right)
-                    ]
-                  ),
-                  Divider(),
-                  Expanded(
-                    child : PagewiseListView(
-                      pageSize: PAGE_SIZE,
-                      itemBuilder: this._videoItemBuilder,
-                      pageFuture: (pageIndex) => fetchPosts(pageIndex * PAGE_SIZE),
+              Container(
+                child : TabBar(
+                  indicatorColor: Color.fromRGBO(191, 19, 19, 1),
+                  labelColor: Color.fromRGBO(191, 19, 19, 1),
+                  unselectedLabelColor: Color.fromRGBO(185, 194, 205, 1),
+                  tabs : [
+                    Text(
+                      "ARTICLES",
+                      style: TextStyle(
+                        fontSize: 24
+                      ),
+                    ),
+                    Text(
+                      "VIDEOS",
+                      style: TextStyle(
+                        fontSize: 24
+                      ),
                     )
-                  )
-                ]
+                  ]
+                )
               ),
-            ]
+                Expanded(
+                  child : TabBarView(
+                    children : [
+                      Column(
+                        children : [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children : [
+                              Icon(Icons.arrow_left),
+                              Text("Swipe Between Sections"),
+                              Icon(Icons.arrow_right)
+                            ]
+                          ),
+                          Divider(),
+                          Expanded(
+                            child : PagewiseListView(
+                              pageSize: PAGE_SIZE,
+                              itemBuilder: this._itemBuilder,
+                              pageFuture : (pageIndex) => fetchPosts(pageIndex * PAGE_SIZE)
+                            )
+                          )
+                        ]
+                      ),
+                      Column(
+                        children : [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children : [
+                              Icon(Icons.arrow_left),
+                              Text("Swipe Between Sections"),
+                              Icon(Icons.arrow_right)
+                            ]
+                          ),
+                          Divider(),
+                          Expanded(
+                            child : PagewiseListView(
+                              pageSize: PAGE_SIZE,
+                              itemBuilder: this._videoItemBuilder,
+                              pageFuture: (pageIndex) => fetchPosts(pageIndex * PAGE_SIZE),
+                            )
+                          )
+                        ]
+                      ),
+                    ]
+                  )
+              )
+            ],
           )
         ),
       );
